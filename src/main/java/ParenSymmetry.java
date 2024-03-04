@@ -10,26 +10,24 @@ public class ParenSymmetry {
     private Boolean isBalanced(String s) {
         // implement this method
         int length = s.length();
-        int i=0;
+        int i = 0;
         char[] ch = s.toCharArray();
         int open = 0;
         int closed = 0;
         boolean flag = false;
-        while(i<length){
-         if(ch[i]==')'){
-             open++;
-         }
-         else if(ch[i]=='('){
-             closed++;
-         }
+        while (i < length) {
+            if (ch[i] == ')') {
+                open++;
+            } else if (ch[i] == '(') {
+                closed++;
+            }
             i++;
         }
 
-        if(open==closed){
+        if (open == closed) {
             System.out.println("Balanced string");
             flag = true;
-        }
-        else {
+        } else {
             System.out.println("Not balanced string");
             flag = false;
         }
@@ -42,18 +40,16 @@ public class ParenSymmetry {
         File file = new File(filename);
 
         Scanner scanner;
-        try{
-             scanner = new Scanner(file);
-            while (scanner.hasNextLine()){
+        try {
+            scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
                 String str = scanner.nextLine();
                 boolean b = isBalanced(str);
                 System.out.println(b);
             }
             scanner.close();
 
-        }
-
-        catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
             System.exit(1);
         }
