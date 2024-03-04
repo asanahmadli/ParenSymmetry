@@ -1,27 +1,70 @@
 package src.main.java;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 public class ParenSymmetry {
 
 
     private Boolean isBalanced(String s) {
         // implement this method
-        return null;
+        int length = s.length();
+        int i=0;
+        char[] ch = s.toCharArray();
+        int open = 0;
+        int closed = 0;
+        boolean flag = false;
+        while(i<length){
+         if(ch[i]==')'){
+             open++;
+         }
+         else if(ch[i]=='('){
+             closed++;
+         }
+            i++;
+        }
+
+        if(open==closed){
+            System.out.println("Balanced string");
+            flag = true;
+        }
+        else {
+            System.out.println("Not balanced string");
+            flag = false;
+        }
+
+        return flag;
     }
 
     private void checkFile(String filename) {
         // open file named filename
+        File file = new File(filename);
 
-        // for each line in the file
-            // read the line
-            // print whether or not the line's parenthesis are balanced
+        Scanner scanner;
+        try{
+             scanner = new Scanner(file);
+            while (scanner.hasNextLine()){
+                String str = scanner.nextLine();
+                boolean b = isBalanced(str);
+                System.out.println(b);
+            }
+            scanner.close();
 
-        // CLOSE the file
+        }
+
+        catch (FileNotFoundException e){
+            System.out.println(e.getMessage());
+            System.exit(1);
+        }
+
     }
 
     public static void main(String[] args) {
         ParenSymmetry ps = new ParenSymmetry();
-
-        Boolean b0 = ps.isBalanced("()");
+        ps.checkFile("./TestStrings1.txt");
+        Boolean b0 = ps.isBalanced("(    ())!()");
+        System.out.println(b0);
         printResult(b0, true);
 
         String[] falseStrings = {"(", "((", ")", "", "(()())((())))"};
